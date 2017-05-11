@@ -11,9 +11,11 @@ class ContactsController < ApplicationController
   def create
     contact = Contact.new(
                           first_name: params[:first_name],
+                          middle_name: params[:middle_name],
                           last_name: params[:last_name],
                           email: params[:email],
-                          phone_number: params[:phone_number]
+                          phone_number: params[:phone_number],
+                          bio: params[:bio]
                           )
     contact.save
   end
@@ -31,9 +33,11 @@ class ContactsController < ApplicationController
     contact = Contact.find(params[:id])
     contact.assign_attributes(
                               first_name: params[:first_name],
+                              middle_name: params[:middle_name],
                               last_name: params[:last_name],
                               email: params[:email],
-                              phone_number: params[:phone_number]
+                              phone_number: params[:phone_number],
+                              bio: params[:bio]
                               )
     contact.save
   end
