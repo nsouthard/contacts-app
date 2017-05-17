@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   get 'contacts/:id/edit' => 'contacts#edit'
   patch 'contacts/:id' => 'contacts#update'
   delete 'contacts/:id' => 'contacts#destroy'
+
+  get '/signup' => 'users#new'
+  post '/signup' => 'users#create'
 end

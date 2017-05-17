@@ -1,6 +1,16 @@
 class ContactsController < ApplicationController
   
   def index
+
+    if session[:count] == nil
+      session[:count] = 0
+    end
+
+    session[:count] += 1
+    @visit_count = session[:count]
+
+
+
     @contacts = Contact.all
   end
 
@@ -45,6 +55,23 @@ class ContactsController < ApplicationController
   def destroy
     contact = Contact.find(params[:id])
     contact.destroy
+  end
+
+  def create
+    user = User.new(
+                    name: params[:name],
+                    email: params[:email],
+                    password: params[:password],
+                    password_confirmation: params[:password_confirmation]
+                    )
+    if user.save
+      session[:user_id] = user.id
+      flash[:success] = 'Successfully created account'
+      redirect_to '/'
+    else
+      flash[:warning] = 'Invalid email or password'
+      redirect_to '/signup'
+    end
   end
   
 end
